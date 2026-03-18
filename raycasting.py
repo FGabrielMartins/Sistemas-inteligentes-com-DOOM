@@ -17,6 +17,20 @@ class RayCasting:
         for ray, values in enumerate(self.ray_casting_result):
             depth, proj_height, textures, offset = values
 
+    #Método para obter objetos para desenhar
+    def get_objects_to_render(self):
+        self.objects_to_render = []
+        for ray, values in enumerate(self.ray_casting_result):
+            depth, proj_height, texture, offset = values
+
+            wall_column = self.textures[texture].subsurface(
+                offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE
+            )
+            wall_column = pg.transform.scale(wall_column, (SCALE, proj_height))
+            wall_pos = (ray * SCALE, HALF_HEIGH - proj_height // 2)
+
+            self.objects_to_render.append((depth, wall_column, wall_pos))
+
     def ray_cast(self):
         self.ray_casting_result = []
         ox, oy = self.game.player.pos
@@ -57,7 +71,7 @@ class RayCasting:
             for i in range(MAX_DEPTH):
                 tile_vert = int(x_vert), int(y_vert)
                 if tile_vert in self.game.map.world_map:
-                    textures_vert = self.game.map.world_map[tile_vert]
+                    texture_vert = self.game.map.world_map[tile_vert]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -65,7 +79,7 @@ class RayCasting:
 
             #Profundidade, texture, offset
             if depth_vert < depth_hor:
-                depth, texture  = depth_vert, textures_vert
+                depth, texture  = depth_vert, texture_vert
                 y_vert %= 1
                 offset = y_vert if cos_a > 0 else (1 - y_vert)
             else:
@@ -86,3 +100,4 @@ class RayCasting:
 
     def update(self):
         self.ray_cast()
+        self.get_objects_to_render()

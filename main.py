@@ -42,6 +42,7 @@ class Game:
     #A cada interação pintaremos nossa tela de preto
     def draw(self):
         self.screen.fill('black')
+        self.object_render.draw()
         #self.map.draw()
         #self.player.draw()
 
