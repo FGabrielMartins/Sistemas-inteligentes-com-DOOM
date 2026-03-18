@@ -16,6 +16,8 @@ from object_render import *
 class Game:
     def __init__(self):
         pg.init()
+        #Desabilitar o cursor
+        pg.mouse.set_visible(False)
         #Criando um tela
         self.screen = pg.display.set_mode(Resolucao)
         self.clock = pg.time.Clock()
@@ -41,10 +43,11 @@ class Game:
 
     #A cada interação pintaremos nossa tela de preto
     def draw(self):
-        self.screen.fill('black')
-        self.object_render.draw()
-        #self.map.draw()
-        #self.player.draw()
+        #Preencher a tela com preto
+        #self.screen.fill('black') 
+        self.object_render.draw() #3D
+        #self.map.draw() #2D
+        #self.player.draw() #2D
 
     #Verificamos os eventos de fechamento
     def check_events(self):

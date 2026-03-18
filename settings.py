@@ -12,6 +12,16 @@ PLAYER_POS = 1.5, 5 #mini_map posição do jogador no mapa
 PLAYER_ANGLE = 0 #angulo
 PLAYER_SPEED = 0.004 #Velocidade do movimento
 PLAYER_ROT_SPEED = 0.002 #velocidade de rotação
+PLAYER_SIZE_SCALE = 60 #Tamanho do player
+
+#Controle do mouse
+MOUSE_SENSITIVITY = 0.0003
+MOUSE_MAX_REL = 40
+MOUSE_BORDER_LEFT = 100
+MOUSE_BORDER_RIGHT = WIDTH - MOUSE_BORDER_LEFT
+
+#Cor do chão
+FLOOR_COLOR = (30, 30, 30)
 
 #definimos o campo de visão
 FOV = math.pi / 3
