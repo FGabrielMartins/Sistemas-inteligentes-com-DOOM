@@ -12,6 +12,8 @@ from player import *
 from raycasting import *
 #Acesso as texturas
 from object_render import *
+#Arquivo sprite
+from sprite_object import *
 
 class Game:
     def __init__(self):
@@ -31,11 +33,15 @@ class Game:
         self.player = Player(self)
         self.object_render = ObjectRenderer(self)
         self.raycasting = RayCasting(self)
+        self.static_sprite = SpriteObject(self)
+        self.animated_sprite = AnimatedSprite(self)
 
     #Atualização de tela
     def update(self):
         self.player.update()
         self.raycasting.update()
+        self.static_sprite.update()
+        self.animated_sprite.update()
         pg.display.flip()
         #Exibir info do FPS
         self.delta_time = self.clock.tick(FPS)
