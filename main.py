@@ -15,6 +15,8 @@ from object_render import *
 #Arquivo sprite
 from sprite_object import *
 from object_handler import *
+#Arquivo da arma
+from weapon import *
 
 class Game:
     def __init__(self):
@@ -37,12 +39,14 @@ class Game:
         #self.static_sprite = SpriteObject(self)
         #self.animated_sprite = AnimatedSprite(self)
         self.object_handler = ObjectHandler(self)
+        self.weapon = Weapon(self)
 
     #Atualização de tela
     def update(self):
         self.player.update()
         self.raycasting.update()
         self.object_handler.upadate()
+        self.weapon.update()
         #self.static_sprite.update()
         #self.animated_sprite.update()
         pg.display.flip()
@@ -57,6 +61,7 @@ class Game:
         self.object_render.draw() #3D
         #self.map.draw() #2D
         #self.player.draw() #2D
+        self.weapon.draw()
 
     #Verificamos os eventos de fechamento
     def check_events(self):
@@ -64,6 +69,8 @@ class Game:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
+            #disparo da arma
+            self.player.single_fire_event(event)
 
     #looping principal do jogo, onde o jogo e executado
     def run(self):
